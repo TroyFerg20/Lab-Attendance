@@ -1,0 +1,67 @@
+---
+title: "CSU ESS 330 Lab 3"
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+```{r}
+1 + 1
+```
+
+```{r}
+#Question 1:  How does easy access to historical and real-time environmental data shape our understanding of climate trends, resource management, and public health? What happens when this data disappears or becomes inaccessible? 
+
+#Answer: Access to historical and real-time environmental data shapes out understanding of climate trends becasue we are able to see what the climate was in the past for specific areas, and know the difference from the past. When the data disappears or becomes inaccessible, the loss of knowledge in the population will decrease. 
+
+
+```
+
+```{r}
+#Question 2
+library(tidyverse); library(flextable)
+url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv'
+
+covid_data = read.csv(url)
+my.date = 2022-01-01
+my.state = "Colorado"
+
+txt <- "2022-01-01"
+class(txt)
+date <- as.Date(txt)
+class(date)
+
+"Colorado" <- covid_data |>
+  filter(state == my.state) |>
+  group_by(county) |>
+  arrange(date)|>
+  mutate(new_cases = cases - lag(cases), new_deaths = deaths - lag(deaths)) |>
+  ungroup()
+  
+filter(Colorado, date == my.date)|>
+  slice_max(cases, n = 5) |>
+  select(Date = date, County = county, Cases = new_cases) |>
+  flextable()|>
+  set_caption("Most Total Cases")
+
+
+```
+
+```{r}
+#Question 3
+
+
+```
+
+```{r}
+#Question 4
+
+
+```
+
+```{r}
+#Question 5
+
+
+```
